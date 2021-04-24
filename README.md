@@ -2,6 +2,7 @@
 * [Game Rule](#general-info)
 * [Angel](#technologies)
 * [Demon](#setup)
+* [Features](#setup)
 
 ## Game Rule
 This game is a dice game between two LEGENDARY characters with special abilities.
@@ -25,3 +26,4 @@ If both numbers are equal,The Demon LOSES the game.
 ## Features
 The game design is mainly based on DOM manipulation and CSS animations.
 Asynchronous function is used for the EXCITING DICE MOMENTS!
+
