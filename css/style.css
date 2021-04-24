@@ -1,0 +1,302 @@
+@import url("https://fonts.googleapis.com/css?family=Cinzel&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  font-family: "Cinzel", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(203, 15%, 37%);
+}
+main {
+  height: 100rem;
+  width: 200rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+.board {
+  box-shadow: 0em 0em 2em 1em #000000;
+  background-color: hsl(206, 3%, 55%);
+  margin: 90px auto;
+  height: 90%;
+  width: 90%;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.player {
+  height: 50%;
+  width: 100%;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.point {
+  font-size: 8rem;
+}
+.race {
+  font-size: 3rem;
+}
+.up-race {
+  position: absolute;
+  bottom: 0;
+  left: 7%;
+}
+
+.up-point {
+}
+.down-point {
+}
+.down-race {
+  position: absolute;
+  top: 0;
+  left: 7%;
+}
+.angel {
+  background: radial-gradient(
+    circle,
+    rgba(242, 232, 114, 1) 15%,
+    rgba(246, 245, 238, 1) 90%
+  );
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: black;
+}
+
+.angel-intro {
+  display: none;
+  background-color: rgba(255, 255, 255, 0);
+  font-family: inherit;
+  font-size: 2rem;
+  left: 38rem;
+  /* border: solid 0.5px black; */
+  position: relative;
+  transform: translateY(-56%);
+  z-index: 2;
+  width: 37rem;
+  height: 37rem;
+}
+
+.angel-intro p {
+  margin: 2rem;
+  opacity: 2;
+}
+
+.coolDownIntro {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  left: 29rem;
+  width: 20rem;
+  height: 8rem;
+  transform: translateY(-230%);
+}
+
+.demon {
+  background-image: radial-gradient(circle, #b11212 15%, #161614 90%);
+  color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.demon-intro {
+  display: none;
+  background-color: rgba(255, 255, 255, 0);
+  font-family: inherit;
+  font-size: 2rem;
+  left: 38rem;
+  /* border: solid 0.5px black; */
+  position: relative;
+  transform: translateY(56%);
+  z-index: 2;
+  width: 37rem;
+  height: 39rem;
+}
+
+.demon-intro p {
+  margin: 2rem;
+  opacity: 2;
+}
+
+.dices {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.dice {
+  position: absolute;
+  height: 10rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  height: 100px;
+  
+}
+
+.dice-left {
+  transform: translate(-100%, -10%);
+}
+
+.dice-right {
+  transform: translate(100%, -10%);
+}
+
+button {
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 0.7rem 2.5rem;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-family: inherit;
+  outline: none;
+  margin-right: 4rem;
+}
+
+.restart {
+  position: fixed;
+  top: 10%;
+  left: 6%;
+}
+
+.function {
+  transform: translateX(-5%);
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  transform: translateX(10%);
+}
+.roll {
+  margin: auto 3rem;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.coolDownBtn {
+  background-color: #c0c0c0;
+}
+.coolDownBtn:hover {
+  transform: scale(1);
+}
+
+/* button:hover > .angel-intro {
+  opacity: 0.5;
+} */
+
+.hidden {
+  display: none;
+}
+
+.darker {
+  filter: brightness(50%);
+}
+
+@keyframes get_darker {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(50%);
+  }
+}
+
+.get_darker {
+  animation: get_darker 500ms ease-in-out forwards;
+}
+
+@keyframes remove_darker {
+  from {
+    filter: brightness(50%);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+
+.remove_darker {
+  animation: remove_darker 500ms ease-in-out forwards;
+}
+
+
+@keyframes disappear {
+  from {
+    visibility: visible;
+    opacity: 100%;
+    
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+    
+  }
+}
+
+.disappear{
+  animation: disappear 100ms ease-in-out forwards;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+.appear{
+  animation: appear 100ms ease-in-out forwards;
+}
+
+@keyframes game_over {
+  from {
+    filter: brightness(50%);
+  }
+  to {
+    filter: brightness(0);
+  }
+}
+
+.game_over {
+  animation: game_over 500ms ease-in-out forwards;
+}
+
+
+@keyframes game_start {
+  from {
+    filter: brightness(0);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+
+.game_start {
+  animation: game_start 500ms ease-in-out forwards;
+}
