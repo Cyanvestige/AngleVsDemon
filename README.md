@@ -1,7 +1,7 @@
 ![Priview](preview.png)
 
 ## Table of contents
-* [Game Rule](#general-info)
+* [Game Rule](#Game Rule)
 * [Angel](#technologies)
 * [Demon](#setup)
 * [Features](#setup)
