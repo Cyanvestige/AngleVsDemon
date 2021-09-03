@@ -5,7 +5,7 @@
 * [Angel](#technologies)
 * [Demon](#setup)
 * [Features](#setup)
-* [CodeSandbox]
+* [CodeSandbox](#setup)
 ## Game Rule
 This game is a dice game between two LEGENDARY characters with special abilities.
 Each character rolls the dice alternatively.
