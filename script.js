@@ -1,4 +1,4 @@
-//Coding Challenge #1 from lecture 109
+// A Dice Game in pure JavaScript
 "use strict";
 const primeNum = [2, 3, 5];
 const nonPrimeNum = [1, 4, 6];
@@ -19,6 +19,7 @@ const angelBoard = document.querySelector(".angel");
 const demonBoard = document.querySelector(".demon");
 const restart = document.querySelector(".restart");
 let angelWin = false;
+let angelUsingAbility = false;
 let demonWin = false;
 let demonUsingAbility = false;
 let isRolling = false;
@@ -45,8 +46,8 @@ let upPoint = 50;
 let downPoint = 50;
 let randPoint1 = 1;
 let randPoint2 = 1;
-let angCoolDown = false;
-let demonCoolDown = false;
+let angleCoolDown = false;
+
 let gameOver = false;
 let angleTurn = true;
 let demonTurn = false;
@@ -98,14 +99,14 @@ const rolling = function () {
   setDarker(angelBoard);
   setDarker(demonBoard);
   const i = setInterval(function () {
-    randPoint1 = Math.floor(Math.random() * 6 + 1);
+    randPoint1 = Math.floor(Math.random() * 6) + 1;
     dice1.src = `dice-${randPoint1}.png`;
     if (!dice2.classList.contains("hidden")) {
-      randPoint2 = Math.floor(Math.random() * 6 + 1);
+      randPoint2 = Math.floor(Math.random() * 6) + 1;
       dice2.src = `dice-${randPoint2}.png`;
     }
   }, 8);
-  if (angCoolDown) angelIntro.classList.add("coolDownIntro");
+  if (angleCoolDown) angelIntro.classList.add("coolDownIntro");
   let promise = new Promise(function (resolve) {
     setTimeout(function () {
       angelIntro.classList.add("hidden");
@@ -151,13 +152,12 @@ angelRoll.addEventListener("click", async function () {
   angelRoll.classList.add("coolDownBtn");
   const rolledPoints = await rolling();
 
-  if (!angCoolDown) {
+  if (!angleCoolDown) {
     angelIntro.classList.remove("coolDownIntro");
     angelIntro.innerHTML = angelIntroContent;
   }
-  // console.log(rolledPoints);
 
-  if (angCoolDown) {
+  if (angelUsingAbility) {
     console.log(Math.max(...rolledPoints));
     upPoint += Math.max(...rolledPoints);
 
@@ -165,9 +165,8 @@ angelRoll.addEventListener("click", async function () {
     if (rolledPoints[0] === unlockNumber) {
       angelIntro.innerHTML = angelIntroContent;
       unlockNumber = 0;
-
       angelIntro.classList.remove("coolDownIntro");
-      angCoolDown = false;
+      angleCoolDown = false;
     } else if (unlockNumber === 0) {
       unlockNumber = rolledPoints[0];
     }
@@ -177,34 +176,22 @@ angelRoll.addEventListener("click", async function () {
   upPointEle.textContent = upPoint + "";
   setDarker(angelBoard);
   angleTurn = false;
-
-  // setTimeout(() => {
-  //   demonBoard.classList.add("remove_darker");
-  //   demonBoard.classList.remove("get_darker");
-  // }, 2000);
-
+  angelUsingAbility = false;
   demonTurn = true;
   demonAbility.classList.remove("coolDownBtn");
   demonRoll.classList.remove("coolDownBtn");
 });
 
 demonRoll.addEventListener("click", async function (e) {
-  // downPoint += await rolling();
-  // downPointEle.textContent = downPoint + "";
   if (!demonTurn || gameOver) return;
   const rolledPoints = await rolling();
   let point = Math.min(...rolledPoints);
-  // if (!angCoolDown) {
-  //   angelIntro.classList.remove("coolDownIntro");
-  //   angelIntro.innerHTML = angelIntroContent;
-  // }
-  console.log(rolledPoints);
-  console.log(primeNum.includes(rolledPoints[0]));
   if (!demonUsingAbility) {
     downPoint += rolledPoints[0];
     resetDice();
   } else {
-    if (
+    if (rolledPoints[0] == rolledPoints[1]) downPoint = 0;
+    else if (
       primeNum.includes(rolledPoints[0]) &&
       primeNum.includes(rolledPoints[1])
     ) {
@@ -222,27 +209,21 @@ demonRoll.addEventListener("click", async function (e) {
     }
   }
   downPointEle.textContent = downPoint + "";
-  // demonBoard.classList.add("get_darker");
-  // demonBoard.classList.remove("remove_darker");
   demonTurn = false;
+  demonUsingAbility = false;
   setDarker(demonBoard);
   demonAbility.classList.add("coolDownBtn");
   demonRoll.classList.add("coolDownBtn");
-  // angelAbility.classList.add("coolDownBtn");
-  // setTimeout(() => {
-  //   angelBoard.classList.add("remove_darker");
-  //   angelBoard.classList.remove("get_darker");
-  // }, 1000);
 
   angleTurn = true;
-  if (!angCoolDown) angelAbility.classList.remove("coolDownBtn");
+  if (!angleCoolDown) angelAbility.classList.remove("coolDownBtn");
   angelRoll.classList.remove("coolDownBtn");
 });
 
 angelAbility.addEventListener("mouseover", function () {
   if (!angleTurn || gameOver) return;
 
-  if (angCoolDown) {
+  if (angleCoolDown) {
     angelIntro.textContent = `You cannot use the ability until you roll ${unlockNumber}`;
   } else angelIntro.innerHTML = angelIntroContent;
   angelIntro.style.display = "block";
@@ -259,22 +240,12 @@ angelAbility.addEventListener("mouseleave", function () {
 //if use the ability show the second dice
 angelAbility.addEventListener("click", function () {
   if (!angleTurn || gameOver) return;
-  if (angCoolDown) return;
+  if (angleCoolDown) return;
   dice2.classList.toggle("hidden");
   dice1.classList.toggle("dice-left");
   dice2.classList.toggle("dice-right");
-  angCoolDown = true;
-});
-console.log("aaa");
-
-demonAbility.addEventListener("mouseover", function () {
-  if (!demonTurn || gameOver) return;
-  if (demonCoolDown) {
-    demonIntro.textContent = `You cannot use the ability until you roll ${unlockNumber}`;
-  } else demonIntro.innerHTML = demonIntroContent;
-  demonIntro.style.display = "block";
-  demonIntro.style.backgroundColor =
-    "rgba(" + 255 + "," + 255 + "," + 255 + "," + 0.35 + ")";
+  angleCoolDown = !angleCoolDown;
+  angelUsingAbility = !angelUsingAbility;
 });
 
 demonAbility.addEventListener("mouseleave", function () {
@@ -291,7 +262,6 @@ demonAbility.addEventListener("click", function () {
   dice1.classList.add("dice-left");
   dice2.classList.add("dice-right");
 });
-console.log("aaa");
 
 restart.addEventListener("click", function () {
   gameOver = false;
@@ -315,7 +285,7 @@ restart.addEventListener("click", function () {
 
   angelIntro.classList.remove("coolDownIntro");
 
-  angCoolDown = false;
+  angleCoolDown = false;
   demonCoolDown = false;
   angleTurn = true;
   demonTurn = false;
