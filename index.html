@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>DiceGame</title>
-  </head>
-  <body>
-    <div class="angel-intro">
-      <p>
-        The Angle rolls two dices at the same time, and the larger one will be
-        added to her points.
-      </p>
-      <p>
-        However, the Angle will NOT be able to use the ability again until she
-        rolls the same number once again.
-      </p>
-      <p>If both numbers are the same,The Angle WINS the game.</p>
-    </div>
-
-    <div class="demon-intro">
-      <p>
-        The Demon rolls two dices at the same time, if both of them are prime
-        numbers,he would take the larger number from his opponent.Otherwise, the
-        smaller one will be added to his points.
-      </p>
-      <p>
-        However, if none of them is prime number demon would lose points equal
-        to the sum of them.
-      </p>
-      <p>If both numbers are the same,The Demon LOSES the game.</p>
-    </div>
-    <main>
-      <div class="board">
-        <section class="player angel">
-          <div class="race up-race">Angel</div>
-          <div class="point up-point">50</div>
-          <div class="function">
-            <div class="buttons">
-              <button class="angel-roll">Roll</button>
-              <button class="angel-ap">Ability</button>
-            </div>
-          </div>
-        </section>
-        <section class="distance"></section>
-        <div class="dices">
-          <img src="dice-1.png" class="dice dice1" />
-          <img src="dice-1.png" class="dice dice2 hidden" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>DiceGame</title>
+    </head>
+    <body>
+        <div class="angel-intro">
+            <p>
+                The Angle rolls two dices at the same time, and the larger one
+                will be added to her points.
+            </p>
+            <p>
+                However, the Angle will NOT be able to use the ability again
+                until she rolls the same number once again.
+            </p>
+            <p>If both numbers are the same,The Angle WINS the game.</p>
         </div>
-        <section class="player demon">
-          <div class="race down-race">Demon</div>
-          <div class="point down-point">50</div>
-          <div class="function">
-            <div class="buttons">
-              <button class="demon-roll ">Roll</button>
-              <button class="demon-ap">Ability</button>
-            </div>
-          </div>
-        </section>
-      </div>
 
-      <button class="restart">Restart</button>
-    </main>
-    <script src="script.js"></script>
-  </body>
+        <div class="demon-intro">
+            <p>
+                The Demon rolls two dices at the same time, if both of them are
+                prime numbers,he would take the larger number from his
+                opponent.Otherwise, the smaller one will be added to his points.
+            </p>
+            <p>
+                However, if none of them is prime number demon would lose points
+                equal to the sum of them.
+            </p>
+            <p>If both numbers are the same,The Demon LOSES the game.</p>
+        </div>
+        <main>
+            <div class="board">
+                <section class="player angel">
+                    <div class="race up-race">Angel</div>
+                    <div class="point up-point">50</div>
+                    <div class="function">
+                        <div class="buttons">
+                            <button class="angel-roll">Roll</button>
+                            <button class="angel-ap">Ability</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="distance"></section>
+                <div class="dices">
+                    <img src="dice-1.png" class="dice dice1" />
+                    <img src="dice-1.png" class="dice dice2 hidden" />
+                </div>
+                <section class="player demon">
+                    <div class="race down-race">Demon</div>
+                    <div class="point down-point">50</div>
+                    <div class="function">
+                        <div class="buttons">
+                            <button class="demon-roll">Roll</button>
+                            <button class="demon-ap">Ability</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <button class="restart">Restart</button>
+        </main>
+        <script src="script.js"></script>
+    </body>
 </html>
