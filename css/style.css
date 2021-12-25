@@ -88,7 +88,7 @@ main {
     left: 38rem;
     /* border: solid 0.5px black; */
     position: relative;
-    transform: translateY(-56%);
+    transform: translateY(-50%);
     z-index: 2;
     width: 37rem;
     height: 37rem;
@@ -124,14 +124,14 @@ main {
     left: 38rem;
     /* border: solid 0.5px black; */
     position: relative;
-    transform: translateY(56%);
+    transform: translateY(70%);
     z-index: 2;
     width: 37rem;
     height: 39rem;
 }
 
 .demon-intro p {
-    margin: 2rem;
+    margin: 1.5rem;
     opacity: 2;
 }
 
