@@ -19,7 +19,6 @@ const angelBoard = document.querySelector(".angel");
 const demonBoard = document.querySelector(".demon");
 const restart = document.querySelector(".restart");
 let angelWin = false;
-let angelUsingAbility = false;
 let demonWin = false;
 let demonUsingAbility = false;
 let isRolling = false;
@@ -152,16 +151,13 @@ angelRoll.addEventListener("click", async function () {
     angelAbility.classList.add("coolDownBtn");
     angelRoll.classList.add("coolDownBtn");
     const rolledPoints = await rolling();
-
+    const largerPoint = Math.max(...rolledPoints)
     if (!angleCoolDown) {
         angelIntro.classList.remove("coolDownIntro");
         angelIntro.innerHTML = angelIntroContent;
     }
-
-    if (angelUsingAbility) {
-        console.log(Math.max(...rolledPoints));
-        upPoint += Math.max(...rolledPoints);
-
+    if (angleCoolDown) {
+        upPoint += largerPoint;
         angelAbility.classList.add("coolDownBtn");
         if (rolledPoints[0] === unlockNumber) {
             angelIntro.innerHTML = angelIntroContent;
@@ -169,15 +165,15 @@ angelRoll.addEventListener("click", async function () {
             angelIntro.classList.remove("coolDownIntro");
             angleCoolDown = false;
         } else if (unlockNumber === 0) {
-            unlockNumber = rolledPoints[0];
+            unlockNumber = largerPoint
         }
-    } else {
-        upPoint += rolledPoints[0];
+    } 
+    else {
+        upPoint += largerPoint
     }
     upPointEle.textContent = upPoint + "";
     setDarker(angelBoard);
     angleTurn = false;
-    angelUsingAbility = false;
     demonTurn = true;
     demonAbility.classList.remove("coolDownBtn");
     demonRoll.classList.remove("coolDownBtn");
@@ -186,7 +182,8 @@ angelRoll.addEventListener("click", async function () {
 demonRoll.addEventListener("click", async function (e) {
     if (!demonTurn || gameOver) return;
     const rolledPoints = await rolling();
-    let point = Math.min(...rolledPoints);
+    const largerPoint = Math.max(...rolledPoints);
+    const smallerPoint = Math.min(...rolledPoints);
     if (!demonUsingAbility) {
         downPoint += rolledPoints[0];
         resetDice();
@@ -196,17 +193,16 @@ demonRoll.addEventListener("click", async function (e) {
             primeNum.includes(rolledPoints[0]) &&
             primeNum.includes(rolledPoints[1])
         ) {
-            point = rolledPoints[0] + rolledPoints[1];
-            upPoint -= point;
+            upPoint -= largerPoint;
             upPointEle.textContent = upPoint + "";
-            downPoint += point;
+            downPoint += largerPoint;
         } else if (
             !primeNum.includes(rolledPoints[0]) &&
             !primeNum.includes(rolledPoints[1])
         ) {
             downPoint -= rolledPoints[0] + rolledPoints[1];
         } else {
-            downPoint += point;
+            downPoint += smallerPoint;
         }
     }
     downPointEle.textContent = downPoint + "";
@@ -246,7 +242,6 @@ angelAbility.addEventListener("click", function () {
     dice1.classList.toggle("dice-left");
     dice2.classList.toggle("dice-right");
     angleCoolDown = !angleCoolDown;
-    angelUsingAbility = !angelUsingAbility;
 });
 
 demonAbility.addEventListener("mouseover", function () {
@@ -296,7 +291,7 @@ restart.addEventListener("click", function () {
     angelIntro.classList.remove("coolDownIntro");
 
     angleCoolDown = false;
-    demonCoolDown = false;
+    demonUsingAbility = false;
     angleTurn = true;
     demonTurn = false;
 });
